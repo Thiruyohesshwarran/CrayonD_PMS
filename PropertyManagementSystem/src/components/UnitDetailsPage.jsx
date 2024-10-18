@@ -2,11 +2,11 @@ import React from 'react';
 import { Box, Typography, Button, IconButton, Badge } from '@mui/material';
 import Grid from '@mui/material/Grid2';
 import JumeiraEstate from '../assets/JumeiraEstate.png';
-import DeleteIcon from '@mui/icons-material/Delete';
 import HomeIcon from '@mui/icons-material/Home';
 import BathtubIcon from '@mui/icons-material/Bathtub';
 import HotelIcon from '@mui/icons-material/Hotel';
 import Trash from '../assets/Trash.svg';
+import CustomPopperButton from './CustomPopperButton';
 
 const UnitCard = ({ discounted, price, originalPrice }) => {
   return (
@@ -42,15 +42,15 @@ const UnitCard = ({ discounted, price, originalPrice }) => {
             sx={{
               position: 'absolute',
               bottom: '8px',
-              left: '8px',
+              right: '0px',
               backgroundColor: '#FFF4EB',
-              borderRadius: '8px',
-              padding: '4px 8px',
+              borderRadius: '4px 0 0 4px',
+              padding: '2px 4px',
             }}
           >
             <Typography
               variant="warning"
-              sx={{ color: '#FF9340', fontWeight: 'bold' }}
+              sx={{ color: '#FF9340', fontWeight: 'bold',fontSize:"10px" }}
             >
               % Discount Applied
             </Typography>
@@ -107,9 +107,7 @@ const UnitCard = ({ discounted, price, originalPrice }) => {
         </Box>
       </Box>
 
-      <Button variant="text" sx={{ color: '#5078E1',fontSize:"11px",textTransform:"none" }}>
-        + Customise
-      </Button>
+      <CustomPopperButton/>
     </Box>
   );
 };
@@ -130,7 +128,7 @@ const UnitDetailsPage = () => {
         <UnitCard discounted={false} price={1200} originalPrice={1200} />
         </Grid>
         <Grid item>
-        <UnitCard discounted={false} price={900} originalPrice={1200} />
+        <UnitCard discounted={false} price={1200} originalPrice={1200} />
         </Grid>
         <Grid item>
         <UnitCard discounted={false} price={1200} originalPrice={1200} />

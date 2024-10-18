@@ -13,24 +13,40 @@ function DropDownBox() {
           console.log(`Clicked on ${menuItem}`);
         };
       };
-
-      const MenuButton = styled(BaseMenuButton)(`
-        font-family: 'Nunito Sans';
-        font-weight: 600;
-        font-size: 13px;
-        line-height: 1.5;
-        padding: 6px 16px;
-        display: flex; 
-        align-items: center;
-        gap:30px;
-        border-radius: 8px;
-        transition: all 150ms ease;
-        cursor: pointer;
-        background: #f5f7fa;
-        border: 1px solid #e4e8ee;
-        box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-        color: #1c1c1c;
-      `);       
+      
+      const StyledMenu = styled(Menu)({
+        backgroundColor: '#f5f7fa',
+        borderRadius: '8px',
+      });
+      
+      const StyledMenuItem = styled(MenuItem)({
+        color: '#333', 
+        padding: '5px 15px',
+        fontWeight: 600,
+        display:"flex",
+        fontSize: '13px',
+        '&:hover': {
+          backgroundColor: '#e0e0e0', 
+          color: '#000',
+        },
+      });
+      
+      const MenuButton = styled(BaseMenuButton)({
+        fontWeight: 600,
+        fontSize: '13px',
+        padding: '6px 10px',
+        display: 'flex',
+        alignItems: 'center',
+        gap: '30px',
+        borderRadius: '8px',
+        transition: 'all 150ms ease',
+        cursor: 'pointer',
+        background: '#f5f7fa',
+        border: '1px solid #e4e8ee',
+        boxShadow: '0 1px 2px 0 rgb(0 0 0 / 0.05)',
+        color: '#1c1c1c',
+      });
+      
 
   return (
    <div>
@@ -39,10 +55,10 @@ function DropDownBox() {
         Casagrand
         <ExpandMoreIcon fontSize="medium"/>
       </MenuButton>
-      <Menu>
-        <MenuItem onClick={createHandleMenuClick('Csagrand')}>Casagrand</MenuItem>
-        <MenuItem onClick={createHandleMenuClick('G-Square')}>G-Square</MenuItem>
-      </Menu>
+      <StyledMenu>
+        <StyledMenuItem onClick={createHandleMenuClick('Csagrand')}>Casagrand</StyledMenuItem>
+        <StyledMenuItem onClick={createHandleMenuClick('G-Square')}>G-Square</StyledMenuItem>
+      </StyledMenu>
     </Dropdown>
    </div>
   )
