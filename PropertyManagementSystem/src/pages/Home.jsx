@@ -17,7 +17,6 @@ import SearchBar from '../components/SearchBar';
 import {IconButton} from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Bell from '../assets/Bell.svg';
-import Unitdetails from '../components/UnitDetails';
 import UnitDetailsPage from '../components/UnitDetailsPage';
 
 function Home() {
@@ -121,7 +120,7 @@ function Home() {
                       </Box>
                     </Box>
                     <Box bgcolor="#f6f8fa" sx={{height:"100%",width:"40%",paddingX:"10px",boxSizing:"border-box",paddingTop:"15px"}}>
-                      <Box sx={{fontSize:"13px",color:"#4E5A6B",fontWeight:"bold"}}>UnitDetails<UnitDetailsPage/></Box>
+                      <Box sx={{fontSize:"13px",color:"#4E5A6B",fontWeight:"bold"}}>Unit Details<UnitDetailsPage/></Box>
                     </Box>
                     <Box bgcolor="#ffffff" sx={{height:"100%",width:"30%",paddingX:"10px",boxSizing:"border-box",paddingTop:"15px"}}>
                       <Box sx={{fontSize:"13px",color:"#4E5A6B",fontWeight:"bold"}}>
