@@ -6,6 +6,8 @@ import {Divider} from '@mui/material';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import CloseIcon from '@mui/icons-material/Close';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+import AmenitiesDialogBox from './AmenitiesDialogBox';
+import UtilitiesDialogBox from './UtilitiesDialogBox';
 
 const CustomPopperButton = () => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -30,7 +32,7 @@ const CustomPopperButton = () => {
     setOpenDialog(false);
   };
 
-  const StyledListItem = styled(ListItem)(({  }) => ({
+  const StyledListItem = styled(ListItem)(({theme  }) => ({
     padding: '8px',
     fontSize: '11px',
     color:"#4E5A6B",
@@ -61,9 +63,11 @@ const CustomPopperButton = () => {
             <List>
               <StyledListItem onClick={handleDialogOpen}>Add Pricing Component</StyledListItem>
               <Divider/>
-              <StyledListItem>Add Amenities</StyledListItem>
+              {/* <StyledListItem>Add Amenities</StyledListItem> */}
+              <AmenitiesDialogBox StyledListItem={StyledListItem}/>
               <Divider/>
-              <StyledListItem>Add Utilities</StyledListItem>
+              {/* <StyledListItem>Add Utilities</StyledListItem> */}
+              <UtilitiesDialogBox StyledListItem={StyledListItem}/>
               <Divider/>
               <StyledListItem>Add Discount</StyledListItem>
               <Divider/>
