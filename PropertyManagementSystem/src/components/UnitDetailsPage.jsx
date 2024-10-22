@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import { Box, Typography, Button, IconButton, Badge } from '@mui/material';
 import Grid from '@mui/material/Grid2';
 import JumeiraEstate from '../assets/JumeiraEstate.png';
@@ -7,8 +7,15 @@ import BathtubIcon from '@mui/icons-material/Bathtub';
 import HotelIcon from '@mui/icons-material/Hotel';
 import Trash from '../assets/Trash.svg';
 import CustomPopperButton from './CustomPopperButton';
+import UnitDetailsDialogBox from './UnitDetailsDialogBox';
 
 const UnitCard = ({ discounted, price, originalPrice }) => {
+  const [openDialogBox, setOpenDialogBox] = useState(false); 
+
+  const handleOpenDialogBox = () => setOpenDialogBox(true); 
+  const handleCloseDialogBox = () => setOpenDialogBox(false);
+
+
   return (
     <Box
       sx={{
@@ -17,10 +24,11 @@ const UnitCard = ({ discounted, price, originalPrice }) => {
         backgroundColor: '#fff',
         textAlign: 'center',
         position: 'relative',
-        boxSizing:'border-box'
+        boxSizing:'border-box',
+        cursor:"pointer",
       }}
     >
-      <Box sx={{ position: 'relative', marginBottom: '12px' }}>
+      <Box sx={{ position: 'relative', marginBottom: '12px' }} onClick={handleOpenDialogBox}>
         <img
           src={JumeiraEstate}
           alt="Unit"
@@ -37,6 +45,8 @@ const UnitCard = ({ discounted, price, originalPrice }) => {
         >
             <img src={Trash}/>
         </IconButton>
+
+        {/* conditional discount */}
         {discounted && (
           <Box
             sx={{
@@ -106,7 +116,7 @@ const UnitCard = ({ discounted, price, originalPrice }) => {
           </Typography>
         </Box>
       </Box>
-
+      <UnitDetailsDialogBox open={openDialogBox} handleClose={handleCloseDialogBox} />
       <CustomPopperButton/>
     </Box>
   );

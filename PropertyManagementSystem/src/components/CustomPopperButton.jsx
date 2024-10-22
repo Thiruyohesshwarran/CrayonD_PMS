@@ -8,11 +8,14 @@ import CloseIcon from '@mui/icons-material/Close';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import AmenitiesDialogBox from './AmenitiesDialogBox';
 import UtilitiesDialogBox from './UtilitiesDialogBox';
+import DiscountDialogBox from './DiscountDialogBox';
 
 const CustomPopperButton = () => {
+  //for customise + popper opening
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleClick = (event) => {
+    event.stopPropagation(); // Prevent dialog from opening
     setAnchorEl(anchorEl ? null : event.currentTarget); 
   };
 
@@ -20,6 +23,7 @@ const CustomPopperButton = () => {
     setAnchorEl(null);
   };
 
+  //for add ֲpricing component
   const [openDialog, setOpenDialog] = useState(false);
 
   // Function to handle opening the dialog
@@ -32,7 +36,7 @@ const CustomPopperButton = () => {
     setOpenDialog(false);
   };
 
-  const StyledListItem = styled(ListItem)(({theme  }) => ({
+  const StyledListItem = styled(ListItem)(() => ({
     padding: '8px',
     fontSize: '11px',
     color:"#4E5A6B",
@@ -69,7 +73,8 @@ const CustomPopperButton = () => {
               {/* <StyledListItem>Add Utilities</StyledListItem> */}
               <UtilitiesDialogBox StyledListItem={StyledListItem}/>
               <Divider/>
-              <StyledListItem>Add Discount</StyledListItem>
+              {/* <StyledListItem>Add Discount</StyledListItem> */}
+              <DiscountDialogBox StyledListItem={StyledListItem}/>
               <Divider/>
               <StyledListItem>Remove Component</StyledListItem>
             </List>
@@ -79,16 +84,17 @@ const CustomPopperButton = () => {
 
       <Dialog open={openDialog} onClose={handleDialogClose} 
         sx={{ '& .MuiDialog-paper': { width: '450px', height: '550px' } }}>
-  <DialogTitle sx={{display:"flex",justifyContent:"space-between"}}>
-    <Box sx={{fontSize:"13px",color:"#091B29",fontWeight:"800"}}>Pricing Table</Box>
+  <DialogTitle sx={{display:"flex",justifyContent:"space-between",alignItems:"center",m:0,p:1}}>
+    <Box sx={{fontSize:"13px",color:"#091B29",fontWeight:"800",paddingLeft:"15px"}}>Pricing Table</Box>
     <Button onClick={handleDialogClose} color="#7C8594">
       <CloseIcon/>
     </Button>
-</DialogTitle>
+  </DialogTitle>
+  <Divider />
   <DialogContent>
     <List>
       {/* Primary */}
-      <ListItem style={{ backgroundColor: '#FEEAEA80' ,marginBottom: '10px', borderRadius: '8px'}}>
+      <ListItem style={{ backgroundColor: '#FEEAEA80',padding:"18px 10px" ,marginBottom: '10px', borderRadius: '8px'}}>
         <ListItemText primary="01 Primary" 
             primaryTypographyProps={{ sx: { fontSize: '13px',color:"#B3776D" } }} />
         <ListItemIcon>
@@ -100,7 +106,7 @@ const CustomPopperButton = () => {
       </ListItem>
 
       {/* Secondary */}
-      <ListItem style={{ backgroundColor: '#EDE4FE80', marginBottom: '10px', borderRadius: '8px' }}>
+      <ListItem style={{ backgroundColor: '#EDE4FE80',padding:"18px 10px" , marginBottom: '10px', borderRadius: '8px' }}>
         <ListItemText primary="02 Secondary" 
             primaryTypographyProps={{ sx: { fontSize: '13px',color:"#896DB3" } }} />
         <ListItemIcon>
@@ -112,7 +118,7 @@ const CustomPopperButton = () => {
       </ListItem>
 
       {/* One Time Charges */}
-      <ListItem style={{ backgroundColor: '#DBF0F180', marginBottom: '10px', borderRadius: '8px' }}>
+      <ListItem style={{ backgroundColor: '#DBF0F180',padding:"18px 10px" , marginBottom: '10px', borderRadius: '8px' }}>
         <ListItemText primary="03 One Time Charges" 
             primaryTypographyProps={{ sx: { fontSize:'13px',color:"#6DAFB3" } }} />
         <ListItemIcon>
@@ -124,7 +130,7 @@ const CustomPopperButton = () => {
       </ListItem>
 
       {/* Refundables */}
-      <ListItem style={{ backgroundColor: '#E4EDFF80', marginBottom: '10px', borderRadius: '8px' }}>
+      <ListItem style={{ backgroundColor: '#E4EDFF80',padding:"18px 10px" , marginBottom: '10px', borderRadius: '8px' }}>
         <ListItemText primary="04 Refundables" 
             primaryTypographyProps={{ sx: { fontSize:'13px',color:"#6D80B3" } }} />
         <ListItemIcon>
@@ -136,7 +142,7 @@ const CustomPopperButton = () => {
       </ListItem>
 
       {/* Inventory Item */}
-      <ListItem style={{ backgroundColor: '#FFFAD880', marginBottom: '10px', borderRadius: '8px' }}>
+      <ListItem style={{ backgroundColor: '#FFFAD880',padding:"18px 10px" , marginBottom: '10px', borderRadius: '8px' }}>
         <ListItemText primary="05 Inventory Item" 
             primaryTypographyProps={{ sx: { fontSize: '13px',color:"#B3A16D" } }} />
         <ListItemIcon>
@@ -148,7 +154,7 @@ const CustomPopperButton = () => {
       </ListItem>
 
       {/* Parking Slot */}
-      <ListItem style={{ backgroundColor: '#FEEAEA80', marginBottom: '10px', borderRadius: '8px' }}>
+      <ListItem style={{ backgroundColor: '#FEEAEA80',padding:"18px 10px", borderRadius: '8px' }}>
         <ListItemText primary="06 Parking Slot" 
             primaryTypographyProps={{ sx: { fontSize: '13px',color:"#B3776D" } }}/>
         <ListItemIcon>

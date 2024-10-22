@@ -7,6 +7,55 @@ import {
 import CloseIcon from '@mui/icons-material/Close';
 import Amendity from '../assets/Amendity.png';
 import HouseboatOutlinedIcon from '@mui/icons-material/HouseboatOutlined';
+import { styled } from '@mui/material/styles';
+import Stack from '@mui/material/Stack';
+
+
+const AntSwitch = styled(Switch)(({ theme }) => ({
+  width: 28,
+  height: 16,
+  padding: 0,
+  display: 'flex',
+  '&:active': {
+    '& .MuiSwitch-thumb': {
+      width: 15,
+    },
+    '& .MuiSwitch-switchBase.Mui-checked': {
+      transform: 'translateX(9px)',
+    },
+  },
+  '& .MuiSwitch-switchBase': {
+      padding: 2,
+      '&.Mui-checked': {
+        transform: 'translateX(12px)',
+        color: '#fff',
+        '& + .MuiSwitch-track': {
+          opacity: 1,
+          backgroundColor: '#EEF9EE',
+        },
+        '&  .MuiSwitch-thumb':{
+          opacity:1,
+          backgroundColor:"#5AC782",
+        }
+      },
+    },
+  '& .MuiSwitch-thumb': {
+    boxShadow: '0 2px 4px 0 rgb(0 35 11 / 20%)',
+    backgroundColor:"#98A0AC",
+    width: 12,
+    height: 12,
+    borderRadius: 6,
+    transition: theme.transitions.create(['width'], {
+      duration: 200,
+    }),
+  },
+  '& .MuiSwitch-track': {
+    borderRadius: 16 / 2,
+    opacity: 1,
+    backgroundColor: '#E4E8EE',
+    boxSizing: 'border-box',
+  },
+}));
 
 const amenitiesData = [
   { id: 1, name: 'Amenities name', price: '$20.00', date: 'Valid Feb 22 - 12 Feb 23', imgSrc: Amendity },
@@ -85,7 +134,7 @@ const AmenitiesDialogBox = ({ StyledListItem }) => {
             {amenitiesData.map((amenity) => (
               <ListItem
                 key={amenity.id}
-                sx={{ display: 'flex', justifyContent:'space-between',alignItems:'center',border:'1px solid #E4E8EE',
+                sx={{ display: 'flex', justifyContent:'space-between',boxSizing:"border-box",alignItems:'center',border:'1px solid #E4E8EE',
                     padding:'2px 0',marginBottom:"5px",borderRadius:"6px" }}
               >
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
@@ -103,7 +152,9 @@ const AmenitiesDialogBox = ({ StyledListItem }) => {
                     }
                   />
                 </Box>
-                <Switch />
+                <Stack direction="row" spacing={1} sx={{ alignItems: 'center',paddingRight:"10px" }}>
+                    <AntSwitch inputProps={{ 'aria-label': 'ant design' }} />
+                </Stack>
               </ListItem>
             ))}
           </List>
