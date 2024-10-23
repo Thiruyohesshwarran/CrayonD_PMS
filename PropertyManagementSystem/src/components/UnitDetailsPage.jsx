@@ -20,7 +20,7 @@ const UnitCard = ({ discounted, price, originalPrice }) => {
     <Box
       sx={{
         borderRadius: '6px',
-        padding: '10px',
+        padding: '10px 10px 2px 10px',
         backgroundColor: '#fff',
         textAlign: 'center',
         position: 'relative',
@@ -32,7 +32,7 @@ const UnitCard = ({ discounted, price, originalPrice }) => {
         <img
           src={JumeiraEstate}
           alt="Unit"
-          style={{ width: '185px',height:"100px", borderRadius: '8px' }}
+          style={{ width: '185px',height:"100px", borderRadius: '4px' }}
         />
         <IconButton
           sx={{
@@ -124,7 +124,7 @@ const UnitCard = ({ discounted, price, originalPrice }) => {
 
 const UnitDetailsPage = () => {
   return (
-    <Box sx={{ height: '400px',overflowY: 'auto', padding:'5px',paddingTop:"20px",
+    <Box sx={{ height: '330px',overflowY: 'auto', padding:'20px 5px',position: 'relative',
         '&::-webkit-scrollbar': {
         display: 'none', 
         },
@@ -133,9 +133,6 @@ const UnitDetailsPage = () => {
     <Grid container spacing={2} width="100%">
         <Grid item>
         <UnitCard discounted={true} price={900} originalPrice={1200} />
-        </Grid>
-        <Grid item>
-        <UnitCard discounted={false} price={1200} originalPrice={1200} />
         </Grid>
         <Grid item>
         <UnitCard discounted={false} price={1200} originalPrice={1200} />
