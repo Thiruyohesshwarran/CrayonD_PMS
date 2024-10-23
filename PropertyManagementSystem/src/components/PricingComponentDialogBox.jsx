@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { styled } from '@mui/material/styles';
-import { Box, Button, Popper, Paper, ClickAwayListener, List, ListItem,Stack,ToggleButton,linearProgressClasses, 
+import { Box, Button, Select, Paper, ClickAwayListener, List, ListItem,Stack,ToggleButton,linearProgressClasses, 
     ListItemText, ListItemIcon, Icon, InputAdornment , FormControl ,OutlinedInput,LinearProgress,FormHelperText,
-    Typography} from '@mui/material';
+    Typography,MenuItem} from '@mui/material';
 import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
 import { Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
 import { Divider } from '@mui/material';
@@ -56,6 +56,20 @@ const PricingComponentDialogBox = ({ StyledListItem }) => {
     {value:"Amount", label:"Amount"},
     {value:"UOM", label:"UOM"},
   ];
+
+  //dropdowm pricing component
+  const [pricing, setPricingComponent] = useState("Pricing1");
+
+  const handleChangePricing = (event) => {
+    setPricingComponent(event.target.value);
+  };
+
+  //dropdown tax component
+  const [tax,setTax] = useState("GST");
+
+  const handleTax = (event) => {
+    setTax(event.target.value);
+  }
 
   const BorderLinearProgress1 = styled(LinearProgress)(({ theme }) => ({
     height: 5,
@@ -184,13 +198,35 @@ const PricingComponentDialogBox = ({ StyledListItem }) => {
             </Box>
             <Box sx={{width:"50%",display:"flex",flexDirection:"column"}}>
             <Typography sx={{fontSize:"12px",color:"#98A0AC",marginBottom:"5px"}}>Pricing Component</Typography>
-            <DropDownBox/>
+            <FormControl>
+              <Select
+                value={pricing}
+                onChange={handleChangePricing}
+                sx={{height:"35px",border:"1px solid #E4E8EE"}}
+                inputProps={{ 'aria-label': 'Without label' }}
+              >
+                <MenuItem value="Pricing1">Pricing Component</MenuItem>
+                <MenuItem value="Pricing2">Pricing Component 2</MenuItem>
+                <MenuItem value="Pricing3">Pricing Component 3</MenuItem>
+              </Select>
+            </FormControl>
             </Box>
             </Box>
             <Box sx={{display:"flex",width:"100%",marginBottom:"20px"}}>
             <Box sx={{width:"50%"}}>
             <Typography sx={{fontSize:"12px",color:"#98A0AC",marginBottom:"5px"}}>Tax Group For Pricing Component</Typography>
-            <DropDownBox/>
+            <FormControl sx={{minWidth:180}}>
+              <Select
+                value={tax}
+                onChange={handleTax}
+                sx={{height:"35px",border:"1px solid #E4E8EE"}}
+                inputProps={{ 'aria-label': 'Without label' }}
+              >
+                <MenuItem value="GST">GST</MenuItem>
+                <MenuItem value="CGST">CGST</MenuItem>
+                <MenuItem value="SGST">SGST</MenuItem>
+              </Select>
+            </FormControl>
             </Box>
             <Box sx={{width:"50%",display:"flex",flexDirection:"column"}}>
             <Typography sx={{fontSize:"12px",color:"#98A0AC",marginBottom:"5px"}}>Component Based On</Typography>
@@ -245,6 +281,13 @@ const PricingComponentDialogBox = ({ StyledListItem }) => {
                         inputProps={{
                         'aria-label': 'weight',
                         }}
+                        startAdornment={
+                          <InputAdornment position="start">
+                            <Typography sx={{ color: "#091B29", fontSize: "13px" }}>
+                              $
+                            </Typography>
+                          </InputAdornment>
+                        }
                         sx={{
                             height:"40px",
                             width:115,
@@ -263,6 +306,13 @@ const PricingComponentDialogBox = ({ StyledListItem }) => {
                         inputProps={{
                         'aria-label': 'weight',
                         }}
+                        startAdornment={
+                          <InputAdornment position="start">
+                            <Typography sx={{ color: "#091B29", fontSize: "13px" }}>
+                              $
+                            </Typography>
+                          </InputAdornment>
+                        }
                         sx={{
                             height:"40px",
                             width:115,
@@ -281,6 +331,13 @@ const PricingComponentDialogBox = ({ StyledListItem }) => {
                         inputProps={{
                         'aria-label': 'weight',
                         }}
+                        startAdornment={
+                          <InputAdornment position="start">
+                            <Typography sx={{ color: "#091B29", fontSize: "13px" }}>
+                              $
+                            </Typography>
+                          </InputAdornment>
+                        }
                         sx={{
                             height:"40px",
                             width:115,
@@ -293,7 +350,8 @@ const PricingComponentDialogBox = ({ StyledListItem }) => {
             </Box>
             <Box sx={{display:"flex",width:"100%",justifyContent:"space-between"}}>
             <Button variant='outlined' sx={{textTransform:"none",color:"#091B29",fontSize:"13px",border:"1px solid #E4E8EE",
-                                fontWeight:"bold",borderRadius:"4px",paddingY:"6px"}}>
+                                fontWeight:"bold",borderRadius:"4px",paddingY:"6px"}}
+                                onClick={()=>setSelectedComponent(null)}>
                 Back
             </Button>
             <Button variant='contained' sx={{textTransform:"none",backgroundColor:"#5078E1",fontSize:"13px",fontWeight:"bold",
