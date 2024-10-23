@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import { styled } from '@mui/material/styles';
-import { Box, Button, Popper, Paper, ClickAwayListener, List, ListItem, 
-    ListItemText, ListItemIcon, Icon } from '@mui/material';
+import { Box, Button, Popper, Paper, ClickAwayListener, List, ListItem,Stack,ToggleButton,linearProgressClasses, 
+    ListItemText, ListItemIcon, Icon, InputAdornment , FormControl ,OutlinedInput,LinearProgress,FormHelperText,
+    Typography} from '@mui/material';
 import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
 import { Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
 import { Divider } from '@mui/material';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import CloseIcon from '@mui/icons-material/Close';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+import DropDownBox from './DropDownBox';
 
 const PricingComponentDialogBox = ({ StyledListItem }) => {
   // for add pricing component
@@ -29,6 +31,73 @@ const PricingComponentDialogBox = ({ StyledListItem }) => {
   };
 
   const [selectedComponent, setSelectedComponent] = useState(null);
+
+  // toggle button revenue
+  const [revenueAlignment, setRevenueAlignment] = useState('Lease');
+
+  const handleChange = (newRevenueAlignment) => {
+    setRevenueAlignment(newRevenueAlignment);
+  };
+
+  const revenuetype = [
+    { value: 'Lease', label: 'Lease' },
+    { value: 'Sales', label: 'Sales' },
+    { value: 'Manage', label: 'Manage' },
+  ];
+
+  //toggle button componentbasedon
+  const [componentBasedOnAlignment,setComponentBasedOnAlignment]=useState('Amount');
+
+  const handleChangeComponentBasedOn = (measureunit) => {
+    setComponentBasedOnAlignment(measureunit);
+  }
+
+  const componentbasedontype = [
+    {value:"Amount", label:"Amount"},
+    {value:"UOM", label:"UOM"},
+  ];
+
+  const BorderLinearProgress1 = styled(LinearProgress)(({ theme }) => ({
+    height: 5,
+    width:115,
+    borderRadius: 2,
+    marginBottom:5,
+    [`&.${linearProgressClasses.colorPrimary}`]: {
+      backgroundColor: theme.palette.grey[200],
+    },
+    [`& .${linearProgressClasses.bar}`]: {
+      borderRadius: 2,
+      backgroundColor:"#FF4B4B",
+    },
+  }));
+
+  const BorderLinearProgress2 = styled(LinearProgress)(({ theme }) => ({
+    height: 5,
+    width:115,
+    borderRadius: 2,
+    marginBottom:5,
+    [`&.${linearProgressClasses.colorPrimary}`]: {
+      backgroundColor: theme.palette.grey[200],
+    },
+    [`& .${linearProgressClasses.bar}`]: {
+      borderRadius: 2,
+      backgroundColor:"#5AC782",
+    },
+  }));
+
+  const BorderLinearProgress3 = styled(LinearProgress)(({ theme }) => ({
+    height: 5,
+    width:115,
+    borderRadius: 2,
+    marginBottom:5,
+    [`&.${linearProgressClasses.colorPrimary}`]: {
+      backgroundColor: theme.palette.grey[200],
+    },
+    [`& .${linearProgressClasses.bar}`]: {
+      borderRadius: 2,
+      backgroundColor:"#FF9340",
+    },
+  }));
 
   const LightTooltip = styled(({ className, ...props }) => (
     <Tooltip {...props} classes={{ popper: className }} />
@@ -69,7 +138,171 @@ const PricingComponentDialogBox = ({ StyledListItem }) => {
         </DialogTitle>
         <Divider />
         <DialogContent>
-        {selectedComponent ? (<Box>Detailed Contents</Box>):(
+        {selectedComponent ? (
+            <Box sx={{height:"98%",width:"100%"}}>
+            <ListItem style={{ backgroundColor: '#FEEAEA80',padding:"10px 10px",marginBottom:'15px',borderRadius:'6px'}}>
+                <ListItemText primary="Primary Pricing Component" 
+                    primaryTypographyProps={{ sx: { fontSize: '13px',color:"#B3776D",fontWeight:"bold" } }} />
+                <ListItemIcon>
+                <LightTooltip title="Base rent or monthly rent amount. you can have 
+                                only one primary pricing component per property." placement="top">
+                <Icon sx={{
+                                color: '#CED3DD', '&:hover':{color:"#4E5A6B"}, 
+                            }}><InfoOutlinedIcon fontSize='small'/></Icon>
+                </LightTooltip>
+                </ListItemIcon>
+            </ListItem>
+            <Box sx={{display:"flex",width:"100%",marginBottom:"20px"}}>
+            <Box sx={{width:"50%"}}>
+            <Typography sx={{fontSize:"12px",color:"#98A0AC",marginBottom:"5px"}}>Revenue Type</Typography>
+            <Stack direction="row" spacing={1} sx={{ alignItems: 'center' }}>
+  {revenuetype.map((child) => (
+    <ToggleButton
+      key={child.value}
+      value={child.value}
+      selected={revenueAlignment === child.value}
+      onChange={() => handleChange(child.value)} 
+      sx={{
+        backgroundColor: revenueAlignment === child.value ? 'blue' : 'white',
+        color: revenueAlignment === child.value ? 'grey' : 'black',
+        '&.Mui-selected': {
+          backgroundColor: '#5078E1 !important',
+          color: '#FFFFFF !important',
+        },
+        border: "1px solid #E4E8EE",
+        borderRadius: '4px',
+        padding: '6px 8px',
+        textAlign: 'center',
+        textTransform:"none",
+        fontSize:"13px !important",
+      }}
+    >
+      {child.label}
+    </ToggleButton>
+  ))}
+</Stack>
+            </Box>
+            <Box sx={{width:"50%",display:"flex",flexDirection:"column"}}>
+            <Typography sx={{fontSize:"12px",color:"#98A0AC",marginBottom:"5px"}}>Pricing Component</Typography>
+            <DropDownBox/>
+            </Box>
+            </Box>
+            <Box sx={{display:"flex",width:"100%",marginBottom:"20px"}}>
+            <Box sx={{width:"50%"}}>
+            <Typography sx={{fontSize:"12px",color:"#98A0AC",marginBottom:"5px"}}>Tax Group For Pricing Component</Typography>
+            <DropDownBox/>
+            </Box>
+            <Box sx={{width:"50%",display:"flex",flexDirection:"column"}}>
+            <Typography sx={{fontSize:"12px",color:"#98A0AC",marginBottom:"5px"}}>Component Based On</Typography>
+            <Stack direction="row" spacing={1} sx={{ alignItems: 'center' }}>
+  {componentbasedontype.map((child) => (
+    <ToggleButton
+      key={child.value}
+      value={child.value}
+      selected={componentBasedOnAlignment === child.value}
+      onChange={() => handleChangeComponentBasedOn(child.value)} 
+      sx={{
+        backgroundColor: componentBasedOnAlignment === child.value ? 'blue' : 'white',
+        color: componentBasedOnAlignment === child.value ? 'grey' : 'black',
+        '&.Mui-selected': {
+          backgroundColor: '#5078E1 !important',
+          color: '#FFFFFF !important',
+        },
+        border: "1px solid #E4E8EE",
+        borderRadius: '4px',
+        padding: '6px 8px',
+        textAlign: 'center',
+        textTransform:"none",
+        fontSize:"13px !important",
+      }}
+    >
+      {child.label}
+    </ToggleButton>
+  ))}
+</Stack>
+            </Box>
+            </Box>
+            <Box sx={{width:"100%",marginBottom:"20px"}}>
+            <Typography sx={{fontSize:"12px",color:"#98A0AC",marginBottom:"5px"}}>UOM Value</Typography>
+            <FormControl sx={{width: '100%'}} variant="outlined">
+            <OutlinedInput
+            id="outlined-adornment-weight" sx={{border: "1px solid #E4E8EE",
+                borderRadius:"4px",height:"40px"}}
+            endAdornment={<InputAdornment position="end">
+                <Typography sx={{ color: "#98A0AC", fontSize: "13px"}}>
+                    SAR/ Total
+                </Typography>
+                           </InputAdornment>}/>
+            </FormControl>
+            </Box>
+            <Box sx={{width:"100%",display:"flex",marginBottom:"20px"}}>
+                <Box sx={{width:"33%"}}>
+                    <Typography sx={{fontSize:"12px",color:"#98A0AC",marginBottom:"5px"}}>Maximum</Typography>
+                    <BorderLinearProgress1 variant="determinate" value={100}/>
+                    <OutlinedInput
+                        id="outlined-adornment-weight"
+                        aria-describedby="outlined-weight-helper-text"
+                        inputProps={{
+                        'aria-label': 'weight',
+                        }}
+                        sx={{
+                            height:"40px",
+                            width:115,
+                        }}
+                    />
+                    <FormHelperText id="outlined-weight-helper-text" sx={{fontSize:"10px"}}>
+                        Sq. Yard/Monthly
+                    </FormHelperText>
+                </Box>
+                <Box sx={{width:"33%"}}>
+                    <Typography sx={{fontSize:"12px",color:"#98A0AC",marginBottom:"5px"}}>Recommended</Typography>
+                    <BorderLinearProgress2 variant="determinate" value={70} />
+                    <OutlinedInput
+                        id="outlined-adornment-weight"
+                        aria-describedby="outlined-weight-helper-text"
+                        inputProps={{
+                        'aria-label': 'weight',
+                        }}
+                        sx={{
+                            height:"40px",
+                            width:115,
+                        }}
+                    />
+                    <FormHelperText id="outlined-weight-helper-text" sx={{fontSize:"10px"}}>
+                        Sq. Yard/Monthly
+                    </FormHelperText>
+                </Box>
+                <Box sx={{width:"33%"}}>
+                    <Typography sx={{fontSize:"12px",color:"#98A0AC",marginBottom:"5px"}}>Minimum</Typography>
+                    <BorderLinearProgress3 variant="determinate" value={30} />
+                    <OutlinedInput
+                        id="outlined-adornment-weight"
+                        aria-describedby="outlined-weight-helper-text"
+                        inputProps={{
+                        'aria-label': 'weight',
+                        }}
+                        sx={{
+                            height:"40px",
+                            width:115,
+                        }}
+                    />
+                    <FormHelperText id="outlined-weight-helper-text" sx={{fontSize:"10px"}}>
+                        Sq. Yard/Monthly
+                    </FormHelperText>
+                </Box>
+            </Box>
+            <Box sx={{display:"flex",width:"100%",justifyContent:"space-between"}}>
+            <Button variant='outlined' sx={{textTransform:"none",color:"#091B29",fontSize:"13px",border:"1px solid #E4E8EE",
+                                fontWeight:"bold",borderRadius:"4px",paddingY:"6px"}}>
+                Back
+            </Button>
+            <Button variant='contained' sx={{textTransform:"none",backgroundColor:"#5078E1",fontSize:"13px",fontWeight:"bold",
+                borderRadius:"4px",marginLeft:"15px",boxShadow:"none"}}>
+                Create Pricing Component
+            </Button>
+            </Box>
+            </Box>
+        ):(
           <List>
             {pricingComponents.map((component) => (
               <ListItem key={component.id} 
