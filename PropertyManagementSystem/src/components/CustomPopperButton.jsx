@@ -55,7 +55,7 @@ const CustomPopperButton = () => {
       <Popper id={id} open={open} anchorEl={anchorEl} placement="right">
         <ClickAwayListener onClickAway={handleClose}>
           <Paper sx={{ minWidth: '100px' }}>
-            <List>
+            <List sx={{padding:0}}>
               {/* <StyledListItem onClick={handleDialogOpen}>Add Pricing Component</StyledListItem> */}
               <PricingComponentDialogBox StyledListItem={StyledListItem}/>
               <Divider/>

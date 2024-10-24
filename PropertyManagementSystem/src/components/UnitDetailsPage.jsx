@@ -8,6 +8,8 @@ import HotelIcon from '@mui/icons-material/Hotel';
 import Trash from '../assets/Trash.svg';
 import CustomPopperButton from './CustomPopperButton';
 import UnitDetailsDialogBox from './UnitDetailsDialogBox';
+import SVGComponent from './icons/TrashIcon';
+import TrashIcon from './icons/TrashIcon';
 
 const UnitCard = ({ discounted, price, originalPrice }) => {
   const [openDialogBox, setOpenDialogBox] = useState(false); 
@@ -43,7 +45,7 @@ const UnitCard = ({ discounted, price, originalPrice }) => {
             boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',
           }}
         >
-            <img src={Trash}/>
+          <TrashIcon/>
         </IconButton>
 
         {/* conditional discount */}

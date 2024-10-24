@@ -41,7 +41,7 @@ function Home() {
             <Box sx={{ display: 'flex',height:"100%", alignItems:'center',borderLeft:'2px solid white' }}>
           <Avatar
             alt="Bala Ganesh"
-            src="https://via.placeholder.com/40" 
+            src={Prospect} 
             sx={{ marginLeft: 2 }}
           />
           <Box sx={{display:'flex',flexDirection:'column'}}>
@@ -84,7 +84,7 @@ function Home() {
                       Lead Details
                   <Box sx={{paddingBottom:"18px",marginBottom:"18px",borderBottom:"1px solid #E4E8EE"}}>
                   <Box sx={{ display: "flex", marginTop: "15px", alignItems: "center",border:"1px solid #E4E8EE",borderRadius:"4px",padding:"10px"}}>
-                    <Avatar src={Prospect} sx={{ width: 25, height: 25, marginRight: "10px",objectFit:"cover" }} />
+                    <Avatar src={Prospect} variant="rounded" sx={{ width: 37, height: 37, marginRight: "10px",objectFit:"cover" }} />
                     <Box sx={{display:"flex",flexDirection:"column"}}>
                     <Box sx={{display:"flex",alignItems:"center"}}>
                       <Typography variant="subtitle1" color="#091B29" fontWeight="bold" fontSize="13px">Tom Cruise</Typography>

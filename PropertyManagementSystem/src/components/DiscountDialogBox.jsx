@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import {
-  Dialog, DialogTitle, DialogContent, IconButton,
-  Typography, Box,  Checkbox, Divider, Avatar
+  Dialog, DialogTitle, DialogContent, IconButton,FormControl,MenuItem,
+  Typography, Box,  Checkbox, Divider, Avatar,Button,Select,
 } from '@mui/material';
 import Grid from '@mui/material/Grid2';
 import Amendity from '../assets/Amendity.png';
@@ -17,6 +17,13 @@ const DiscountDialogBox = ({ StyledListItem }) => {
 
   const handleOpenDiscountDialog = () => setOpenDiscountDialog(true);
   const handleCloseDiscountDialog = () => setOpenDiscountDialog(false);
+
+  //discount dropdown
+  const [discount, setDiscount] = useState("AED");
+
+  const handleChangeDiscount = (event) => {
+    setDiscount(event.target.value);
+  };
 
   return (
     <div>
@@ -139,9 +146,10 @@ const DiscountDialogBox = ({ StyledListItem }) => {
                 </Box>
               </Box>
             </Grid>
-
+                    
             {/* Right Section (Pricing Details) */}
-            {/* <Grid item width="48%" bgcolor="#F8F9FB" borderRadius="16px" padding="10px">
+            <Grid item width="48%">
+            <Grid bgcolor="#F8F9FB" borderRadius="16px" padding="10px">
               <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
                 <Typography color='#091B29' fontSize="14px" textTransform="uppercase" fontWeight="bold">
                     Unit Pricing Details
@@ -152,17 +160,44 @@ const DiscountDialogBox = ({ StyledListItem }) => {
                       <Typography fontSize="13px" color='#4E5A6B' >Bill Name Here</Typography>
                       <Typography variant="body2" color="#98A0AC" fontStyle="italic">Discount</Typography>
                     </Box>
+                    <Box>
                     <Typography fontSize="13px" color='#4E5A6B' fontWeight="bold">$1,000</Typography>
+                    <FormControl sx={{ minWidth: 80 }}>
+                    <Select
+                      value={discount}
+                      onChange={handleChangeDiscount}
+                      displayEmpty
+                      sx={{height:"16px",fontSize:"12px",width:"80px",border:"1px solid #E4E8EE"}}
+                      inputProps={{ 'aria-label': 'Without label' }}
+                    >
+                      <MenuItem value="AED">AED</MenuItem>
+                      <MenuItem value="%">%</MenuItem>
+                    </Select>
+                    </FormControl>
+                    </Box>
                   </Box>
-                ))} */}
+                ))}
                 {/* Final Total */}
-                {/* <Box sx={{ display: 'flex', justifyContent: 'space-between',borderTop: '1px solid rgba(0, 0, 0, 0.12)',
-                            marginTop: 10,bgcolor:"#E4E8EE",padding:"8px" ,borderRadius:"6px",border:"none"}}>
+                <Box sx={{ display: 'flex', justifyContent: 'space-between',borderTop: '1px solid rgba(0, 0, 0, 0.12)',
+                            padding:"8px" ,borderRadius:"6px",border:"none",color:"#4E5A6B"}}>
+                  <Typography fontSize="13px">Amenity Name Here</Typography>
+                  <Typography fontSize="13px">$1,000</Typography>
+                </Box>
+                <Box sx={{ display: 'flex', justifyContent: 'space-between',borderTop: '1px solid rgba(0, 0, 0, 0.12)',
+                            bgcolor:"#E4E8EE",padding:"8px" ,borderRadius:"6px",border:"none"}}>
                   <Typography fontSize="13px" fontWeight="bold">Final Total</Typography>
                   <Typography fontSize="13px" fontWeight="bold">$1,200</Typography>
                 </Box>
               </Box>
-            </Grid> */}
+            </Grid>
+            <Button
+            onClick={handleCloseDiscountDialog}
+            variant="contained"
+            sx={{ width: '100%', backgroundColor: '#5078E1', textTransform: 'none', marginTop:"10px",fontWeight: 600 }}
+          >
+            Apply Discount
+            </Button> 
+            </Grid>
           </Grid>
         </DialogContent>
       </Dialog>
